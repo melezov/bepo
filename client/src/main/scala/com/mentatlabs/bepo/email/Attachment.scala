@@ -14,14 +14,14 @@ object Attachment {
     Attachment(filename, MimeType.fromFileName(filename), content)
 }
 
-object MimeType extends App {
+object MimeType {
   private[this] val Default = "application/octet-stream"
 
   private[this] lazy val ext2Mime = {
     val props = new java.util.Properties
     props.load(getClass.getResourceAsStream("mimetypes.properties"))
-    val mmap = scala.collection.JavaConversions.propertiesAsScalaMap(props)
-    mmap.toMap withDefaultValue Default
+    val mmap = scala.collection.JavaConverters.propertiesAsScalaMapConverter(props)
+    mmap.asScala.toMap withDefaultValue Default
   }
 
   def fromFileName(filename: String) =
