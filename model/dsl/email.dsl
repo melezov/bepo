@@ -1,6 +1,6 @@
-module bepo
+module email
 {
-  value Email {
+  event SendEmail {
     String  from;
     String? replyTo;
 
@@ -12,12 +12,12 @@ module bepo
     String? textBody;
     String? htmlBody;
 
-    List<Bepo.Attachment>  attachments;
+    List<Attachment>  attachments;
   }
 
   value Attachment {
     String  fileName;
     String  mimeType;
-    Binary  bytes;
+    Binary  content;
   }
 }
