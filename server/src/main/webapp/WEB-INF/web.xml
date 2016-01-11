@@ -1,0 +1,7 @@
+<web-app>
+  <listener>
+    <listener-class>
+      org.revenj.server.servlet.Application
+    </listener-class>
+  </listener>
+</web-app>

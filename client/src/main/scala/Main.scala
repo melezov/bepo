@@ -40,22 +40,32 @@ object Main extends App {
     locator.resolve(classOf[DomainProxy]).submit(event)
   }
 
-  val email = Email(
-    From("marko@mentat-labs.com", Some("Marko Elezović"))
-  , To("info@mentat-labs.com")
-  , Subject("Bepo test")
-  , TextBody("This is a test")
-  ).add(ReplyTo("marko@mentat-labs.com"))
-  .add(CC("info+test2@mentat-labs.com"), BCC("info+test1@mentat-labs.com"))
-  .add(Attachment("envelope.png", DatatypeConverter.parseBase64Binary("""
-      iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAqFBMVEU/gtjj7fL9
-      /v7T4uvX5e3W5OyfpKn3+vtRjbCboKZZkrRak7R6qMOTuc7R4erQ4Oltc3qNk5mQ
-      lpzg6/Hl7vPa5+6ZnqT4+/yeo6hOi71TjrFXkbOEipFwd351pcF2fYSBrcZzeoGB
-      iI99hIt8g4p5gIiTmZ/c6O+SmJ7f6vDm7/RudHuVmqBwdn3y9/mdoqdvdXxs2e6J
-      j5ZuvZ93zKN1u46H1nuI1ntghKHUAAAAg0lEQVR4XlXONRYDQQwDUNuDy0xhZsb7
-      3yxONs2q038qBFrXTrlKk9tgNl+Op0PQ1MkRavL9SZDnmJvX4057ONMOMdtmRWHe
-      V6AYHEJcyygMhXk2DUNJ3F3XjoKTqSqGA/0HSkkpGTYMkef1re2pH6SEPBBCKNlC
-      Qp3EwA8X34eXuM0HGwUKgH1UVeIAAAAASUVORK5CYII=""")))
+  for (i <- 1 to 1) {
+    val email = Email(
+      From("info@mentat-labs.com", Some("Mentat Labs Ltd."))
+      , To("marko@mentat-labs.com")
+      , Subject("Bepo test " + i)
+      , TextBody("This is a test")
+    )//.add(ReplyTo("info@mentat-labs.com"))
+      .add(HtmlBody(
+"""<h1>Hi there!</h1>
+ tonaonteunatoeu envelong <b> aeotua </b>a <img src="cid:envelopeXXX.png"/> aeouoaeu
+"""))
+//      .add(CC("info+test2@mentat-labs.com"), BCC("info+test1@mentat-labs.com"))
+      .add(Attachment("envelopeXXX.png", DatatypeConverter.parseBase64Binary(
+        """
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAqFBMVEU/gtjj7fL9
+        /v7T4uvX5e3W5OyfpKn3+vtRjbCboKZZkrRak7R6qMOTuc7R4erQ4Oltc3qNk5mQ
+        lpzg6/Hl7vPa5+6ZnqT4+/yeo6hOi71TjrFXkbOEipFwd351pcF2fYSBrcZzeoGB
+        iI99hIt8g4p5gIiTmZ/c6O+SmJ7f6vDm7/RudHuVmqBwdn3y9/mdoqdvdXxs2e6J
+        j5ZuvZ93zKN1u46H1nuI1ntghKHUAAAAg0lEQVR4XlXONRYDQQwDUNuDy0xhZsb7
+        3yxONs2q038qBFrXTrlKk9tgNl+Op0PQ1MkRavL9SZDnmJvX4057ONMOMdtmRWHe
+        V6AYHEJcyygMhXk2DUNJ3F3XjoKTqSqGA/0HSkkpGTYMkef1re2pH6SEPBBCKNlC
+        Qp3EwA8X34eXuM0HGwUKgH1UVeIAAAAASUVORK5CYII=""")))
+      .add(Attachment("text.txt", "ovo je attachment".getBytes("UTF-8")))
 
-  sendEmail(email)
+    sendEmail(email)
+
+    Thread.sleep(1000)
+  }
 }
