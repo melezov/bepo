@@ -15,6 +15,7 @@ assemblyExcludedJars in assembly := (fullClasspath in assembly).value filterNot 
   cp.data.getName matches """bepo-client-model-\d{8}-\d{6}\.jar"""
 }
 
+/* Publish command: sbt clean package assembly publish */
 publishTo := Some("Element Releases" at "http://repo.element.hr/nexus/content/repositories/releases/")
 credentials ++= {
   val creds = Path.userHome / ".config" / "bepo" / "nexus.config"

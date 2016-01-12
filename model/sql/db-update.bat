@@ -1,7 +1,11 @@
 @echo off
 
+CHOICE /D n /T 10 /C:YN /M "This will destroy all data in the database, are you sure?"
+IF ERRORLEVEL 2 goto :EOF
+
 echo Shutting down connections ...
 psql -Upostgres -q -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'bepo';" > NUL
+IF ERRORLEVEL 1 goto :EOF
 
 echo Dropping database ...
 psql -Upostgres -q -c "DROP DATABASE bepo;"
@@ -33,3 +37,5 @@ dir *.sql | findstr File(s)
 
 echo.
 pause
+
+goto :EOF
