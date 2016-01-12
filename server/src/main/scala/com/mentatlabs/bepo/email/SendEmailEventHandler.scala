@@ -21,12 +21,12 @@ class SendEmailEventHandler(mailer: Mailer) extends DomainEventHandler[SendEmail
     , textBody = Option(sendEmail.getTextBody).map(TextBody.apply)
     , htmlBody = Option(sendEmail.getHtmlBody).map(HtmlBody.apply)
     , attachments = sendEmail.getAttachments.asScala.map { attachment =>
-      Attachment(
-        filename = attachment.getFileName
-        , mimeType = attachment.getMimeType
-        , content = attachment.getContent
-      )
-    }
+        Attachment(
+          filename = attachment.getFileName
+          , mimeType = attachment.getMimeType
+          , content = attachment.getContent
+        )
+      }
     )
 
     mailer.sendMail(email)

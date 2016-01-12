@@ -16,6 +16,6 @@ libraryDependencies ++= Seq(
 , "ch.qos.logback"             % "logback-classic" % "1.1.3"
 )
 
-containerPort := 8080
+containerPort := 9090
 containerLibs in Jetty := Seq("org.eclipse.jetty" % "jetty-runner" % "9.3.6.v20151106" intransitive())
 enablePlugins(JettyPlugin)
